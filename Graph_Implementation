@@ -1,0 +1,92 @@
+def add_node():
+    print("Enter node to be added")
+    nodeval = int(input())
+    for node in graph:
+        for neighbour in graph[node]:
+            if nodeval not in graph:
+                print("Enter the nodes to be connected with new node")
+                val=list(map(int,input().split()))
+                graph[nodeval]=val
+                print(graph)
+                return graph
+            else:
+                print("It cannot be inserted")
+                
+def delete_node():
+    print("Enter node to delete")
+    delnode = int(input())
+    for node1 in graph:
+        for neighbour1 in graph[node1]:
+            if neighbour1 in graph:
+                if neighbour1 == delnode:
+                    graph[node1].remove(neighbour1)
+    if delnode in graph:
+        del graph[delnode]
+        print(graph)
+    else:
+        print("Does not exist")
+        quit()
+        
+def display():
+    print(graph)
+    
+def add_edge():
+    print("Enter node where an edge should be added")
+    edge = int(input())
+    print("Enter the value of edge that need to be added")
+    edge_val = int(input())
+    if edge and edge_val in graph:
+        if edge_val not in graph[edge]:
+            graph[edge1].append(edge_val)
+        print(graph)
+    elif edge in graph:
+        if edge_val not in graph[edge]:
+            graph[edge].append(edge_val)
+            graph[edge_val] = []
+            print(graph)
+        else:
+            print("val exist")
+
+    else:
+        print("Node does not exist")
+        
+def del_edge():
+    print("Enter the node from which edge to be deleted")
+    del1 = int(input())
+    print("Enter the val of edge to be deleted")
+    del_val = int(input())
+    for n in graph:
+        for neighbour2 in graph[n]:
+            if del1 in graph and del_val in graph[del1]:
+                graph[del1].remove(del_val)
+                print(graph)
+            else:
+                print("This  node is not present into the graph")
+                quit()   
+                
+ graph = {1: [3,4],
+         2: [1,3],
+         3: [5],
+         4: [3,5],
+         5: [None],
+        }
+     
+Switchdict = {
+    1: add_node,
+    2: delete_node,
+    3: display,
+    4: add_edge,
+    5: del_edge
+  #  6: exit()
+}
+Selection =0
+while(Selection !=7):
+    print("Press 1 to add a node")
+    print("Press 2 to delete a node")
+    print("Press 3 to display a graph")
+    print("Press 4 to add an edge to a node")
+    print("Press 5 to delete an edge")
+    print("Press 6 to exit")
+    Selection = int(input())
+    if (Selection>0) and (Selection<7):
+        Switchdict[Selection] ()     
